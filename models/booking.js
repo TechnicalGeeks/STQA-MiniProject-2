@@ -1,7 +1,7 @@
 const mongoose=require('mongoose');
 const Schema=mongoose.Schema;
 
-const MovieSchema= new Schema({
+const BookingSchema= new Schema({
     name:{
         type: String,
         required: true
@@ -21,6 +21,6 @@ const MovieSchema= new Schema({
 
 },{timestamps:true});
 
-const Movie=mongoose.model('Movie',MovieSchema);
+const Booking=mongoose.model('booking',BookingSchema);
 
-module.exports=Movie;
+module.exports=Booking;

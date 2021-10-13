@@ -4,6 +4,10 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 
+// Data Models
+const User=require("./models/user.js");
+const Movie=require("./models/movie.js");
+const Booking=require("./models/booking.js");
 
 // Express App
 const app = express();
@@ -53,10 +57,30 @@ app.get("/home",(req,res)=>{
 
 app.post("/",(req,res)=>{
 	console.log(req.body);
-	res.redirect("/home");
+	User.findOne(req.body).then((result)=>{
+		console.log(result);
+		if(result){
+			res.redirect("/home");
+		}
+		else{
+			res.redirect("/");
+		}
+		
+	})	
 })
 
-app.post("/auth",(req,res)=>{
+app.post("/signUp",(req,res)=>{
 	console.log(req.body);
-	res.render("index")
+	newUser=new User(req.body);
+	newUser.save();
+	res.redirect("/");
 });
+
+app.post("/booking",(req,res)=>{
+	console.log(req.body);
+	newBooking=new Booking(req.body);
+	newBooking.save().then((result)=>{
+		res.json({msg:"Success",status:result});
+	});
+	
+})
