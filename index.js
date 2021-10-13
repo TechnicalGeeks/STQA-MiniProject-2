@@ -53,9 +53,10 @@ app.get("/home",(req,res)=>{
 
 app.post("/",(req,res)=>{
 	console.log(req.body);
-	res.render("home");
+	res.redirect("/home");
 })
 
 app.post("/auth",(req,res)=>{
 	console.log(req.body);
+	res.render("index")
 });
