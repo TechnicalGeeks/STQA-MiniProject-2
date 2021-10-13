@@ -42,3 +42,20 @@ app.use(express.static("public"));
 app.get("/", (req, res) => {
 	res.render("index");
 });
+
+app.get("/signUp",(req,res)=>{
+	res.render("signUp")
+})
+
+app.get("/home",(req,res)=>{
+	res.render("home");
+})
+
+app.post("/",(req,res)=>{
+	console.log(req.body);
+	res.render("home");
+})
+
+app.post("/auth",(req,res)=>{
+	console.log(req.body);
+});
