@@ -52,7 +52,7 @@ app.get("/signUp",(req,res)=>{
 })
 
 app.get("/home",(req,res)=>{
-	res.render("home");
+	res.render("home",{status:""});
 })
 
 app.post("/",(req,res)=>{
@@ -80,7 +80,7 @@ app.post("/booking",(req,res)=>{
 	console.log(req.body);
 	newBooking=new Booking(req.body);
 	newBooking.save().then((result)=>{
-		res.json({msg:"Success",status:result});
+		res.render("home",{status:result});
 	});
 	
 })

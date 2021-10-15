@@ -8,53 +8,65 @@
   <title>Home</title>
 </head>
 <body class="bg-no-repeat bg-center bg-cover" style="background-image: url('./home.jpg')">
-  <div class="min-h-screen">
-<div class="flex justify-end">
-	<div class="bg-white min-h-screen w-1/3 flex justify-center items-center bg-opacity-90">
-		<div>
-        <form method="POST" action="/booking">
-          <div>
-            <h1 class="text-2xl font-bold text-center">Book Tickets</h1>
-          </div>
-          <div class="my-3">
-            <label class="block text-md mb-2" for="name">Name</label>
-            <input  id="name" class="px-4 w-full border-2 py-2 rounded-md text-sm outline-none" type="text" name="name" placeholder="Enter Name">
-          </div>
-          <div class="my-3">
-            <label class="block text-md mb-2" for="email">email</label>
-            <input id="email" class="px-4 w-full border-2 py-2 rounded-md text-sm outline-none" type="email" name="email" placeholder="Enter Email">
-          </div>
-          <div class="mt-5">
-            <label class="block text-md mb-2" for="movie">Movies</label>
-            <select class="px-4 w-full border-2 py-2 rounded-md text-sm outline-none" name="movie" id="movie">
-              <option value="Black Widow">Black Widow</option>
-              <option value="Shang-Chi and the Legend of the Ten Rings">Shang-Chi and the Legend of the Ten Rings</option>
-              <option value=">Eternals">Eternals</option>
-              <option value="Spider-Man: No Way Home (with Sony)">Spider-Man: No Way Home (with Sony)	</option>
-              <option value="Doctor Strange in the Multiverse of Madness">Doctor Strange in the Multiverse of Madness		</option>
-              <option value="Thor: Love and Thunder">Thor: Love and Thunder		</option>
-              <option value="Black Panther: Wakanda Forever">Black Panther: Wakanda Forever	</option>
-            </select>
+  <div class="min-h-screen flex md:justify-end">
+      <div class="bg-white min-h-screen md:w-1/3 flex justify-center items-center bg-opacity-90">
+        <div class="p-5">
+          <form method="POST" action="/booking">
+            <div>
+              <h1 class="text-2xl font-bold text-center">Book Tickets</h1>
+            </div>
+            <div class="my-3">
+              <label class="block text-md mb-2" for="name">Name</label>
+              <input  id="name" class="px-4 w-full border-2 py-2 rounded-md text-sm outline-none" type="text" name="name" placeholder="Enter Name">
+            </div>
+            <div class="my-3">
+              <label class="block text-md mb-2" for="email">email</label>
+              <input id="email" class="px-4 w-full border-2 py-2 rounded-md text-sm outline-none" type="email" name="email" placeholder="Enter Email">
+            </div>
+            <div class="mt-5">
+              <label class="block text-md mb-2" for="movie">Movies</label>
+              <select class="px-4 w-full border-2 py-2 rounded-md text-sm outline-none" name="movie" id="movie">
+                <option value="Black Widow">Black Widow</option>
+                <option value="Shang-Chi and the Legend of the Ten Rings">Shang-Chi and the Legend of the Ten Rings</option>
+                <option value=">Eternals">Eternals</option>
+                <option value="Spider-Man: No Way Home (with Sony)">Spider-Man: No Way Home (with Sony)	</option>
+                <option value="Doctor Strange in the Multiverse of Madness">Doctor Strange in the Multiverse of Madness		</option>
+                <option value="Thor: Love and Thunder">Thor: Love and Thunder		</option>
+                <option value="Black Panther: Wakanda Forever">Black Panther: Wakanda Forever	</option>
+              </select>
+            </div>
             <div class="mt-5">
               <label class="block text-md mb-2" for="numTicket">Number of Tickets</label>
-            <input id="numTicket" class="px-4 w-full border-2 py-2 rounded-md text-sm outline-none" type="number" name="numTicket" placeholder="Enter No. of Tickets">
+              <input id="numTicket" class="px-4 w-full border-2 py-2 rounded-md text-sm outline-none" type="number" name="numTicket" placeholder="Enter No. of Tickets">
             </div>
-        </div>
-            
-              
-              <div class="">
+            <div class="">
                 <button id="submit" class="mt-4 mb-3 w-full bg-green-500 hover:bg-green-400 text-white py-2 rounded-md transition duration-100">Confirm</button>
-              </div>
-        </form>
+            </div>
+          </form>
+          <div id="details" class="p-5 text-blue-600 text-center">
+            <% if(status){  %>
+              <p>Booking Succuessfully. Tickets details will be sent to your mail. </p>
+              <p>Reference ID: <%= status.id %></p>
+            <% } %>  
+          </div>
         </div>
-        </div>
-        </div>
-        </div>
+      </div>
+  </div>
 
-
-
-
-  
-  <br><br>
+<script>
+  function book() {
+    let name=document.getElementById("name");
+    let email=document.getElementById("email");
+    let movie=document.getElementById("movie");
+    let numTicket=document.getElementById("numTicket");
+    fetch("/booking", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json;charset=utf-8",
+		},
+		body: JSON.stringify({ username: username, role: role }),
+	})
+  }
+</script>
 </body>
 </html>
