@@ -72,8 +72,12 @@ app.post("/",(req,res)=>{
 app.post("/signUp",(req,res)=>{
 	console.log(req.body);
 	newUser=new User(req.body);
-	newUser.save();
-	res.redirect("/");
+	newUser.save().then((result)=>{
+		res.json({result:result,status:1});
+	}).catch((err)=>{
+		res.json({status:0,result:err})
+	});
+	
 });
 
 app.post("/booking",(req,res)=>{
